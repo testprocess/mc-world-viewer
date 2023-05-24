@@ -17,9 +17,11 @@ class AnvilParser():
 
         block = chunk.get_block(x, y, z)
 
-        print(block)
-        print(block.id)
-        print(block.properties)
+        # print(block)
+        # print(block.id)
+        # print(block.properties)
+
+        return block.id
 
 
 class NBTParcer():
@@ -33,5 +35,31 @@ class NBTParcer():
         print(nbtfile)
 
 
-parse_map = AnvilParser(0, 0)
-parse_map.get_block(1, 10, 1)
+class Map():
+    def __init__(self):
+        self.map = {}
+        pass
+
+    def get_world(self):
+        for y in range(5):
+            self.get_world_plate(100+y)
+
+        print(self.map)
+
+
+    def get_world_plate(self, y):
+        # x, y, z = (15, 40, 1)
+        # if x >= 16 or y >= 319 or z >= 16:
+        #     return 0
+        self.map[y] = {}
+        parse_map = AnvilParser(0, 0)
+
+        for i in range(16 * 16):
+            gx = (i % 16)
+            gz = (i // 16)
+            self.map[y][i] = parse_map.get_block(gx, y, gz)
+
+
+
+mc_map = Map()
+mc_map.get_world()
