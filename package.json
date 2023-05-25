@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "mc-world-viewer",
+  "version": "1.0.0",
+  "description": "고도로 발달한 마인크래프트는 현실과 구별할 수 없다. 이 프로젝트는 마인크래프트 월드를 3D로 보여줍니다.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "webpack --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/testprocess/mc-world-viewer.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/testprocess/mc-world-viewer/issues"
+  },
+  "homepage": "https://github.com/testprocess/mc-world-viewer#readme",
+  "devDependencies": {
+    "webpack": "^5.84.0",
+    "webpack-cli": "^5.1.1"
+  }
+}
