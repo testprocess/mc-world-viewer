@@ -42,9 +42,9 @@ class Map():
 
     def get_world(self):
         for y in range(5):
-            self.get_world_plate(100+y)
+            self.get_world_plate(10+y)
 
-        print(self.map)
+        return self.map
 
 
     def get_world_plate(self, y):
@@ -60,6 +60,3 @@ class Map():
             self.map[y][i] = parse_map.get_block(gx, y, gz)
 
 
-
-mc_map = Map()
-mc_map.get_world()
