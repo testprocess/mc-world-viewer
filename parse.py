@@ -41,8 +41,9 @@ class Map():
         pass
 
     def get_world(self):
-        for y in range(5):
-            self.get_world_plate(10+y)
+        for y in range(20):
+            self.get_world_plate(60+y)
+            print(y, "processed")
 
         return self.map
 

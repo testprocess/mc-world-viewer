@@ -9,6 +9,14 @@ let state = {
     blocks: undefined
 }
 
+const color = {
+    "stone": 0x6e6e6e,
+    "acacia_leaves": 0x06801a,
+    "grass_block": 0x0bb02,
+    "dirt": 0x914f39,
+    "granite": 0x6e6e6e,
+}
+
 
 const init = async () => {
     state.scene = new THREE.Scene();
@@ -93,10 +101,10 @@ const appendBlocks = async () => {
                     const block = element[xz];
                     const x = xz % 16
                     const z = Math.floor(xz / 16)
+                    const ignoreBlocks = ['air', 'grass']
                     console.log(block, x, z, y)
-                    console.log()
 
-                    if (block != 'air') {
+                    if (!ignoreBlocks.includes(block)) {
                         createBlock({
                             block: block,
                             x: x,
@@ -114,13 +122,29 @@ const appendBlocks = async () => {
 
 const createBlock = async ({ block, x, y, z }) => {
     const geometry = new THREE.BoxGeometry( 1, 1, 1 ); 
-    const material = new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: true} )  // new THREE.MeshBasicMaterial( {color: 0x878787} ); 
+    const texture = setTexture({ type: "ss" })
+    console.log(block)
+    const material = new THREE.MeshPhongMaterial( { color: color[block], depthWrite: true } )  // new THREE.MeshBasicMaterial( {color: 0x878787} ); 
     const cube = new THREE.Mesh( geometry, material ); 
     cube.position.set(x, y, z)
     cube.castShadow = true
     cube.receiveShadow = true
 
     state.scene.add( cube );
+}
+
+const setTexture = ({ type }) => {
+    const textureLoader = new THREE.TextureLoader();
+
+    const texture = textureLoader.load("/static/textures/stone.jpg", (texture) => {
+        texture.repeat.x = 2;
+        texture.repeat.y = 2;
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+    });
+
+
+    return texture
 }
 
 init()
